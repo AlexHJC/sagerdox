@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Certificate;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// show dashboard all certificates
 Route::get('/', function () {
-    return view('index');
+    return view('index', [
+        'certificates' => Certificate::all()
+    ]);
+});
+
+// show single certificate
+Route::get('/certificates/{id}', function ($id) {
+    return view('show', [
+        'certificate' => Certificate::find($id)
+    ]);
+});
+
+Route::get('/certificates/{id}/edit', function ($id) {
+    return view('edit', [
+        'certificate' => Certificate::find($id)
+    ]);
 });
