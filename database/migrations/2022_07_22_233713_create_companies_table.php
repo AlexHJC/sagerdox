@@ -13,14 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('certificates', function (Blueprint $table) {
+        Schema::create('companies', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('uploads')->nullable();
-            $table->unsignedBigInteger('company_id');
-            $table->unsignedBigInteger('product_code');
-            $table->string('category');
-            $table->date('expiry_date');
+            $table->text('address');
+            $table->string('phone', 20);
+            $table->string('email', 50);
             $table->longText('description')->nullable();
             $table->timestamps();
         });
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('certificates');
+        Schema::dropIfExists('companies');
     }
 };

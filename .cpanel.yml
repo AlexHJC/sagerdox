@@ -2,7 +2,5 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/vddgkj91/
-    - /bin/cp -r * $DEPLOYPATH #copy all from root
-    #    - /bin/cp -r ./public/* $DEPLOYPATH/public_html/
-    - /bin/cp ./public/js/*.js $DEPLOYPATH/public_html/js
-    - /bin/cp ./public/css/*.css $DEPLOYPATH/public_html/css
+    - /bin/cp -R /home/vddgkj91/repo/public_html $DEPLOYPATH
+    - /bin/cp -R /home/vddgkj91/repo/lib $DEPLOYPATH

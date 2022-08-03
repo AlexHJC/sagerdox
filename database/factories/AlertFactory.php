@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class CertificateFactory extends Factory
+class AlertFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,10 +18,8 @@ class CertificateFactory extends Factory
     {
         return [
             'title' => $this->faker->sentence(),
-            'company_id' => $this->faker->randomNumber(9, true),
-            'category' => $this->faker->word(),
-            'product_code' => $this->faker->randomNumber(9, true),
-            'expiry_date' => $this->faker->date(),
+            'certificate_id' => $this->faker->randomNumber(9, true),
+            'period_id' => $this->faker->randomNumber(9, true),
             'description' => $this->faker->paragraph(5)
         ];
     }

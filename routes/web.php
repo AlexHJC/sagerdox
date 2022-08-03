@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CertificateController;
 use App\Models\Certificate;
 use Illuminate\Support\Facades\Route;
 
@@ -14,22 +15,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// show dashboard all certificates
-Route::get('/', function () {
-    return view('index', [
-        'certificates' => Certificate::all()
-    ]);
-});
+// MAIN show dashboard all certificates [to show all triggered alerts later]
 
-// show single certificate
-Route::get('/certificates/{id}', function ($id) {
-    return view('show', [
-        'certificate' => Certificate::find($id)
-    ]);
-});
+Route::get('/', [CertificateController::class, 'index']);
 
-Route::get('/certificates/{id}/edit', function ($id) {
-    return view('edit', [
-        'certificate' => Certificate::find($id)
-    ]);
-});
+// CREATE CERTIFICATE show create page for certificates
+Route::get('/certificates/create', [CertificateController::class, 'create']);
+
+// UPDATE CERTIFICATE store listing data when posted from form
+Route::post('/certificates', [CertificateController::class, 'store']);
+
+// UPDATE CERTIFICATE show page to edit existing certificate
+Route::get('/certificates/{certificate}/edit', [CertificateController::class, 'edit']);
+
+// UPDATE CERTIFICATE submit edited certificate to update
+Route::put('/certificates/{certificate}', [CertificateController::class, 'update']);
+
+// DELETE CERTIFICATE submit edited certificate to update
+Route::delete('/certificates/{certificate}', [CertificateController::class, 'destroy']);
+
+// READ CERTIFICATE show single certificate
+Route::get('/certificates/{certificate}', [CertificateController::class, 'show']);
+
+
+
+
+
+
+
+// DELETE CERTIFICATE
