@@ -10,7 +10,22 @@
 
     <h1>dashboard</h1>
 
-    <a href="/certificates/create">create a certificate</a>
+    <a href="/certificates/create">create a certificate</a> <br>
+    @auth
+    <span class="font-bold uppercase">
+        Welcome {{auth()->user()->name}} <br>
+    </span>
+    <form class="inline" method="POST" action="/logout">
+        @csrf
+        <button type="submit">
+            <i class="fa-solid fa-door-closed"></i> logout
+        </button>
+    </form>
+    <a href="/certificates/manage">manage certificates</a>
+    @else
+    <a href="/register">register new user</a> <br>
+    <a href="/login">Login</a>
+    @endauth
 
     <form action="/">
             <input

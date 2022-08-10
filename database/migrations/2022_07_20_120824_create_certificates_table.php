@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('certificates', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->contrained()->onDelete('cascade');
             $table->string('title');
             $table->string('uploads')->nullable();
             $table->unsignedBigInteger('company_id');

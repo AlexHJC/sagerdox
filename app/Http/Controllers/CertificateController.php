@@ -61,6 +61,8 @@ class CertificateController extends Controller
             $formFields['uploads'] = $request->file('uploads')->store('uploads', 'public');
         }
 
+        $formFields['user_id'] = auth()->id();
+
         Certificate::create($formFields);
 
         return redirect('/')->with('success', 'Certificate created successfully');
@@ -69,6 +71,13 @@ class CertificateController extends Controller
     // update certificate data
     public function update(Request $request, Certificate $certificate)
     {
+
+        // make sure logged in user is owner
+
+        if ($certificate->user_id != auth()->id()) {
+            abort(403, 'Unauthorized Action');
+        }
+
         // dd($request->all());
         $formFields = $request->validate([
             'title' => 'required',
@@ -94,9 +103,22 @@ class CertificateController extends Controller
         return back()->with('success', 'Certificate updated successfully');
     }
 
+    // delete certificate
     public function destroy(Certificate $certificate)
     {
+
+        // make sure logged in user is owner
+
+        if ($certificate->user_id != auth()->id()) {
+            abort(403, 'Unauthorized Action');
+        }
+
         $certificate->delete();
         return redirect('/')->with('message', 'listing deleted successfully');
+    }
+
+    public function manage()
+    {
+        return view('certificates.manage', ['certificates' => auth()->user()->certificates()->get()]);
     }
 }

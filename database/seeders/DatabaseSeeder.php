@@ -3,10 +3,11 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use App\Models\Alert;
 use App\Models\Company;
-use App\Models\Certificate;
 use App\Models\Product;
+use App\Models\Certificate;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,11 +19,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $numberofentries = 30;
-        Certificate::factory($numberofentries)->create();
-        Alert::factory($numberofentries)->create();
-        Company::factory($numberofentries)->create();
-        Product::factory($numberofentries)->create();
+        $numberofentries = 5;
+        $user = User::factory()->create([
+            'name' => 'bob',
+            'email' => 'bob@gmail.com'
+        ]);
+        Certificate::factory($numberofentries)->create([
+            'user_id' => $user->id
+        ]);
+
+        // Alert::factory($numberofentries)->create();
+        // Company::factory($numberofentries)->create();
+        // Product::factory($numberofentries)->create();
 
         // \App\Models\User::factory(10)->create();
 
