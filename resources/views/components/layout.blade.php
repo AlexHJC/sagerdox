@@ -68,7 +68,7 @@
                             Create New Product</a>
                     </li>
                     <li>
-                        <a href="/certificates/manage" class="hover:text-laravel"><i class="fa-solid fa-gear"></i>
+                        <a href="/users/manage" class="hover:text-laravel"><i class="fa-solid fa-gear"></i>
                             Manage your data</a>
                     </li>
                     <li>

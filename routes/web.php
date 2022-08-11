@@ -1,9 +1,14 @@
 <?php
 
+use App\Http\Controllers\AlertController;
 use App\Models\Certificate;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CertificateController;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\ProductController;
+use App\Models\Alert;
+use App\Models\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,11 +40,11 @@ Route::put('/certificates/{certificate}', [CertificateController::class, 'update
 // DELETE CERTIFICATE submit edited certificate to update
 Route::delete('/certificates/{certificate}', [CertificateController::class, 'destroy'])->middleware('auth');
 
-// show certificate manage page
-Route::get('/certificates/manage', [CertificateController::class, 'manage'])->middleware('auth');
-
 // READ CERTIFICATE show single certificate
 Route::get('/certificates/{certificate}', [CertificateController::class, 'show']);
+
+// show certificate manage page
+Route::get('/certificates/manage', [CertificateController::class, 'manage'])->middleware('auth');
 
 // CREATE USER show user registration form page
 Route::get('/register', [UserController::class, 'create'])->middleware('guest');
@@ -55,3 +60,50 @@ Route::get('/login', [UserController::class, 'login'])->name('login')->middlewar
 
 // log in user
 Route::post('/users/authenticate', [UserController::class, 'authenticate']);
+
+// show user manage page
+Route::get('/users/manage', [UserController::class, 'manage']);
+
+// crud create, read, update, delete
+
+// CREATE ALERT show create page for alerts
+Route::get('/alerts/create', [AlertController::class, 'create']);
+
+// READ ALERT show read page for alerts
+Route::get('/alerts/{alert}', [AlertController::class, 'show']);
+
+// UPDATE ALERT store new alert data
+Route::post('/alerts', [AlertController::class, 'store']);
+
+// // CREATE ALERT show create page for alerts
+// Route::get('/alerts/create', [AlertController::class, 'create']);
+
+// // READ ALERT show read page for alerts
+// Route::get('/alerts/{alert}', [AlertController::class, 'show']);
+
+// // UPDATE ALERT store new alert data
+// Route::post('/alerts', [AlertController::class, 'store']);
+
+// CREATE COMPANY show create page for companies
+Route::get('/companies/create', [CompanyController::class, 'create']);
+
+// UPDATE COMPANY store new company data
+Route::post('/companies', [CompanyController::class, 'store']);
+
+// READ COMPANY show read page for COMPANY
+Route::get('/companies/{company}', [CompanyController::class, 'show']);
+
+// // CREATE COMPANY show create page for companies
+// Route::get('/companies/create', [CompanyController::class, 'create']);
+
+// // UPDATE COMPANY store new company data
+// Route::post('/companies', [CompanyController::class, 'store']);
+
+// // READ COMPANY show read page for COMPANY
+// Route::get('/companies/{company}', [CompanyController::class, 'show']);
+
+// CREATE PRODUCT show create page for products
+Route::get('/products/create', [ProductController::class, 'create']);
+
+// UPDATE PRODUCT store new product data
+Route::post('/products', [ProductController::class, 'store']);

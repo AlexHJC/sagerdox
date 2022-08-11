@@ -28,9 +28,15 @@ class DatabaseSeeder extends Seeder
             'user_id' => $user->id
         ]);
 
-        // Alert::factory($numberofentries)->create();
-        // Company::factory($numberofentries)->create();
-        // Product::factory($numberofentries)->create();
+        Alert::factory($numberofentries)->create([
+            'user_id' => $user->id
+        ]);
+        Company::factory($numberofentries)->create([
+            'user_id' => $user->id
+        ]);
+        Product::factory($numberofentries)->create([
+            'user_id' => $user->id
+        ]);
 
         // \App\Models\User::factory(10)->create();
 

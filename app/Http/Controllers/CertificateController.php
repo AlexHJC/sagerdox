@@ -36,7 +36,7 @@ class CertificateController extends Controller
     public function create()
     {
         return view('certificates.create', [
-            'certificates' => Certificate::latest()
+            'certificates' => Certificate::all()
         ]);
     }
 

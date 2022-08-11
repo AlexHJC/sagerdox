@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->contrained()->onDelete('cascade');
             $table->string('title');
             $table->unsignedBigInteger('company_id');
             $table->unsignedBigInteger('product_code');

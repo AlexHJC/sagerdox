@@ -59,4 +59,9 @@ class UserController extends Controller
 
         return back()->withErrors(['email' => 'invalid credentials'])->onlyInput('email');
     }
+
+    public function manage()
+    {
+        return view('users.manage', ['certificates' => auth()->user()->certificates()->get()]);
+    }
 }

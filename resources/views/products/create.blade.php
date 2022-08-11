@@ -21,26 +21,74 @@
             },
         };
     </script>
-    <title>Create Certificate</title>
+    <title>Create Product</title>
 </head>
 <main>
     <div class="mx-4">
         <div class="bg-gray-50 border border-gray-200 p-10 rounded max-w-lg mx-auto mt-24">
             <header class="text-center">
                 <h2 class="text-2xl font-bold uppercase mb-1">
-                    Create a Certificate
+                    Create a Product
                 </h2>
             </header>
 
-            <form method="POST" action="/certificates" enctype="multipart/form-data">
+            <form method="POST" action="/products" enctype="multipart/form-data">
                 @csrf
 
                 <div class="mb-6">
                     <label for="title" class="inline-block text-lg mb-2">
-                        Certificate Title</label>
+                        Product title</label>
                     <input class="border border-gray-200 rounded p-2 w-full" type="text" name="title"
                         placeholder="" value="{{ old('title') }}" />
                     @error('title')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="mb-6">
+                    <label for="company_id" class="inline-block text-lg mb-2">
+                        select company</label>
+                    <select name="company_id" id="company_id" class="border border-gray-200 rounded p-2 w-full">
+                        <option value="">---</option>
+                        @foreach ($companies as $company)
+                            <option value="{{ $company['id'] }}">{{ $company['title'] }}</option>
+                        @endforeach
+                    </select>
+                    @error('company_id')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="mb-6">
+                    <label for="product_code" class="inline-block text-lg mb-2">
+                        Product Code</label>
+                    <input class="border border-gray-200 rounded p-2 w-full" type="text" name="product_code"
+                        placeholder="" value="{{ old('product_code') }}" />
+                    @error('product_code')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="mb-6">
+                    <label for="certificate_id" class="inline-block text-lg mb-2">
+                        select certificate</label>
+                    <select name="certificate_id" id="certificate_id" class="border border-gray-200 rounded p-2 w-full">
+                        <option value="">---</option>
+                        @foreach ($certificates as $certificate)
+                            <option value="{{ $certificate['id'] }}">{{ $certificate['title'] }}</option>
+                        @endforeach
+                    </select>
+                    @error('certificate_id')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="mb-6">
+                    <label for="description" class="inline-block text-lg mb-2">
+                        Description
+                    </label>
+                    <textarea class="border border-gray-200 rounded p-2 w-full" name="description" rows="10">N/A</textarea>
+                    @error('description')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
                 </div>
@@ -49,20 +97,6 @@
                     <label for="company_id" class="inline-block text-lg mb-2">Company id</label>
                     <input class="border border-gray-200 rounded p-2 w-full" type="text" name="company_id"
                         value="{{ old('company_id') }}" />
-                    @error('company_id')
-                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                    @enderror
-                </div> --}}
-
-                <div class="mb-6">
-                    <label for="company_id" class="inline-block text-lg mb-2">
-                        select company</label>
-                    <select name="company_id" id="company_id" class="border border-gray-200 rounded p-2 w-full">
-                        <option value="">---</option>
-                        @foreach ($certificates as $certificate)
-                            <option value="{{ $certificate['id'] }}">{{ $certificate['title'] }}</option>
-                        @endforeach
-                    </select>
                     @error('company_id')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
@@ -117,11 +151,11 @@
                     @error('description')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
-                </div>
+                </div> --}}
 
                 <div class="mb-6">
                     <button class="bg-laravel text-white rounded py-2 px-4 hover:bg-black">
-                        Create Certificate
+                        Create Product
                     </button>
 
                     <a href="/"> Back </a>
