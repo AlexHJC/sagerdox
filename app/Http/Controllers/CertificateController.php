@@ -12,7 +12,7 @@ class CertificateController extends Controller
     public function index()
     {
         return view('index', [
-            'certificates' => Certificate::latest()->filter(request(['expiry_date', 'search']))->simplepaginate(6)
+            'certificates' => Certificate::latest()->filter(request(['expiry_date', 'search']))->paginate(3)
         ]);
     }
 
@@ -35,7 +35,9 @@ class CertificateController extends Controller
     // show create form
     public function create()
     {
-        return view('certificates.create');
+        return view('certificates.create', [
+            'certificates' => Certificate::latest()
+        ]);
     }
 
     // store certificate data
@@ -65,7 +67,7 @@ class CertificateController extends Controller
 
         Certificate::create($formFields);
 
-        return redirect('/')->with('success', 'Certificate created successfully');
+        return redirect('/')->with('message', 'Certificate created successfully');
     }
 
     // update certificate data
@@ -100,7 +102,7 @@ class CertificateController extends Controller
 
         $certificate->update($formFields);
 
-        return back()->with('success', 'Certificate updated successfully');
+        return back()->with('message', 'Certificate updated successfully');
     }
 
     // delete certificate

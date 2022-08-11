@@ -1,58 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Sagerdox</title>
-</head>
-<body>
+<x-layout>
+    @include('partials._search')
 
-    <h1>dashboard</h1>
-
-    <a href="/certificates/create">create a certificate</a> <br>
-    @auth
-    <span class="font-bold uppercase">
-        Welcome {{auth()->user()->name}} <br>
-    </span>
-    <form class="inline" method="POST" action="/logout">
-        @csrf
-        <button type="submit">
-            <i class="fa-solid fa-door-closed"></i> logout
-        </button>
-    </form>
-    <a href="/certificates/manage">manage certificates</a>
-    @else
-    <a href="/register">register new user</a> <br>
-    <a href="/login">Login</a>
-    @endauth
-
-    <form action="/">
-            <input
-                type="text"
-                name="search"
-                placeholder="Search"
-            />
-            <div>
-                <button
-                    type="submit"
-                >
-                    Search
-                </button>
-            </div>
-    </form>
+    <div class="lg:grid lg:grid-cols-1 gap-4 space-y-4 md:space-y-0 mx-4">
 
     @unless(count($certificates) == 0)
 
+    <div class="flex border border-black rounded w-40 place-content-center">
+        <div class="text-base font-bold">List of all certificates</div>
+    </div>
+
     @foreach($certificates as $certificate)
 
-    <h2>
-        certificate name:
-        <a href="/certificates/{{$certificate['id']}}">{{$certificate['title']}}</a>
-    </h2>
-    certificate description:
-    <p>{{$certificate['description']}}</p>
-    <br>
+    <div class="flex border">
+        <div>
+            <h3 class="underline text-2xl w-80">
+                <a href="certificates/{{$certificate['id']}}">{{$certificate['title']}}</a>
+            </h3>
+            <div class="text-xs font-bold mb-1">Company ID: {{$certificate['company_id']}}</div>
+            <div class="text-xs font-bold mb-1">Product Code: {{$certificate['product_code']}}</div>
+            <div class="text-xs font-bold mb-1">Category: {{$certificate['category']}}</div>
+            <div class="text-xs font-bold mb-1">Expiry date: {{$certificate['expiry_date']}}</div>
+        </div>
+        <div class="text-lg mt-4">
+            <i class="fa-solid fa-info"></i> {{$certificate['description']}}
+        </div>
+        
+    </div>
 
     @endforeach
 
@@ -64,5 +37,5 @@
         {{$certificates->links()}}
     </div>
 
-</body>
+</x-layout>
 </html>
