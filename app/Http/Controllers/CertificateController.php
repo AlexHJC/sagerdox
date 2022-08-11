@@ -12,7 +12,7 @@ class CertificateController extends Controller
     public function index()
     {
         return view('index', [
-            'certificates' => Certificate::latest()->filter(request(['expiry_date', 'search']))->paginate(3)
+            'certificates' => Certificate::latest()->filter(request(['expiry_date', 'search']))->paginate(6)
         ]);
     }
 

@@ -17,12 +17,12 @@ class CertificateFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->sentence(),
+            'title' => $this->faker->sentence(2),
             'company_id' => $this->faker->randomNumber(9, true),
             'category' => $this->faker->word(),
             'product_code' => $this->faker->randomNumber(9, true),
             'expiry_date' => $this->faker->date(),
-            'description' => $this->faker->paragraph(5)
+            'description' => $this->faker->paragraph(2)
         ];
     }
 }

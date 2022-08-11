@@ -37,7 +37,7 @@
         <title>Sagerdox</title>
     </head>
 
-    <body class="mb-48">
+    <body class="mb-12">
         <nav class="flex justify-between items-center mb-4">
             <a href="/"><img class="w-24" src="{{ asset('images/home.png') }}" alt=""
                     class="logo" /></a>
@@ -52,24 +52,24 @@
                         </span>
                     </li>
                     <li>
-                        <a href="certificates/create" class="hover:text-laravel"><i class="fa-solid fa-plus"></i>
-                            Create new Certificate</a>
+                        <a href="/certificates/create" class="hover:text-laravel"><i class="fa-solid fa-plus"></i>
+                            Create New Certificate</a>
                     </li>
                     <li>
-                        <a href="alerts/create" class="hover:text-laravel"><i class="fa-solid fa-plus"></i>
-                            Create new Alert</a>
+                        <a href="/alerts/create" class="hover:text-laravel"><i class="fa-solid fa-plus"></i>
+                            Create New Alert</a>
                     </li>
                     <li>
-                        <a href="companies/create" class="hover:text-laravel"><i class="fa-solid fa-plus"></i>
-                            Create new Company</a>
+                        <a href="/companies/create" class="hover:text-laravel"><i class="fa-solid fa-plus"></i>
+                            Create New Company</a>
                     </li>
                     <li>
-                        <a href="products/create" class="hover:text-laravel"><i class="fa-solid fa-plus"></i>
-                            Create new Product</a>
+                        <a href="/products/create" class="hover:text-laravel"><i class="fa-solid fa-plus"></i>
+                            Create New Product</a>
                     </li>
                     <li>
-                        <a href="certificates/manage" class="hover:text-laravel"><i class="fa-solid fa-gear"></i>
-                            Manage data</a>
+                        <a href="/certificates/manage" class="hover:text-laravel"><i class="fa-solid fa-gear"></i>
+                            Manage your data</a>
                     </li>
                     <li>
                         <form class='inline' method='POST' action="/logout">

@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $numberofentries = 5;
+        $numberofentries = 10;
         $user = User::factory()->create([
             'name' => 'bob',
             'email' => 'bob@gmail.com'
