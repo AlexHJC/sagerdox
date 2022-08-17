@@ -19,24 +19,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $numberofentries = 100;
-        $user = User::factory()->create([
-            'name' => 'bob',
-            'email' => 'bob@gmail.com'
-        ]);
-        Certificate::factory($numberofentries)->create([
-            'user_id' => $user->id
-        ]);
+        // $numberofentries = 10;
+        // $user = User::factory()->create([
+        //     'name' => 'bob',
+        //     'email' => 'bob@gmail.com'
+        // ]);
+        // Certificate::factory($numberofentries)->create([
+        //     'user_id' => $user->id
+        // ]);
 
-        Alert::factory($numberofentries)->create([
-            'user_id' => $user->id
-        ]);
-        Company::factory($numberofentries)->create([
-            'user_id' => $user->id
-        ]);
-        Product::factory($numberofentries)->create([
-            'user_id' => $user->id
-        ]);
+        // Alert::factory($numberofentries)->create([
+        //     'user_id' => $user->id
+        // ]);
+        // Company::factory($numberofentries)->create([
+        //     'user_id' => $user->id
+        // ]);
+        // Product::factory($numberofentries)->create([
+        //     'user_id' => $user->id
+        // ]);
 
         // \App\Models\User::factory(10)->create();
 

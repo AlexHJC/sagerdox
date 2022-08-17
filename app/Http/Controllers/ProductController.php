@@ -38,7 +38,8 @@ class ProductController extends Controller
     {
         return view('products.edit', [
             'product' => $product,
-            'certificates' => Certificate::all()
+            'certificates' => Certificate::all(),
+            'companies' => Company::all()
         ]);
     }
 
@@ -48,10 +49,18 @@ class ProductController extends Controller
         // dd($request->all());
         $formFields = $request->validate([
             'title' => 'required',
-            'company_id' => ['required', 'numeric'],
-            'product_code' => 'required',
-            'certificate_id' => 'required',
+            // 'company_id' => 'required',
+            'product_code' => ['required', 'numeric'],
+            // 'certificate_id' => 'required',
         ]);
+
+        if ($request->company_id) {
+            $formFields['company_id'] = implode(',', $request->company_id);
+        }
+
+        if ($request->certificate_id) {
+            $formFields['certificate_id'] = implode(',', $request->certificate_id);
+        }
 
         if ($request->has('description')) {
             $formFields['description'] = $request['description'];
@@ -78,10 +87,18 @@ class ProductController extends Controller
         // dd($request->all());
         $formFields = $request->validate([
             'title' => 'required',
-            'company_id' => ['required', 'numeric'],
-            'product_code' => 'required',
-            'certificate_id' => 'required',
+            // 'company_id' => 'required',
+            'product_code' => ['required', 'numeric'],
+            // 'certificate_id' => 'required',
         ]);
+
+        if ($request->company_id) {
+            $formFields['company_id'] = implode(',', $request->company_id);
+        }
+
+        if ($request->certificate_id) {
+            $formFields['certificate_id'] = implode(',', $request->certificate_id);
+        }
 
         if ($request->has('description')) {
             $formFields['description'] = $request['description'];

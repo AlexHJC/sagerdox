@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Certificate;
+use App\Models\Alert;
 use App\Models\Company;
+use App\Models\Product;
+use App\Models\Certificate;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -13,7 +15,8 @@ class CertificateController extends Controller
     public function index()
     {
         return view('index', [
-            'certificates' => Certificate::latest()->filter(request(['expiry_date', 'search']))->paginate(6)
+            'certificates' => Certificate::latest()->filter(request(['expiry_date', 'search']))->paginate(6),
+            'alerts' => Alert::all()
         ]);
     }
 
@@ -30,7 +33,8 @@ class CertificateController extends Controller
     {
         return view('certificates.edit', [
             'certificate' => $certificate,
-            'companies' => Company::all()
+            'companies' => Company::all(),
+            'products' => Product::all()
         ]);
     }
 
@@ -50,9 +54,13 @@ class CertificateController extends Controller
             'title' => 'required',
             'company_id' => 'required',
             'category' => 'required',
-            'product_code' => ['required', 'numeric'],
+            'product_code' => 'required',
             'expiry_date' => ['required', 'date']
         ]);
+
+        if ($request->product_code) {
+            $formFields['product_code'] = implode(',', $request->product_code);
+        }
 
         if ($request->company_id) {
             $formFields['company_id'] = implode(',', $request->company_id);
@@ -88,9 +96,13 @@ class CertificateController extends Controller
             'title' => 'required',
             'company_id' => 'required',
             'category' => 'required',
-            'product_code' => ['required', 'numeric'],
+            'product_code' => 'required',
             'expiry_date' => ['required', 'date']
         ]);
+
+        if ($request->product_code) {
+            $formFields['product_code'] = implode(',', $request->product_code);
+        }
 
         if ($request->company_id) {
             $formFields['company_id'] = implode(',', $request->company_id);

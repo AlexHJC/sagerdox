@@ -8,17 +8,18 @@
             <h2>
                 Company title: {{ $company['title'] }}
             </h2>
-            <p>Company address: {{ $company['address'] }}</p>
-            <p>Company phone: {{ $company['phone'] }}</p>
-            <p>Company email: {{ $company['email'] }}</p>
-            <p>Company description: {{ $company['description'] }}</p>
+            <p class="border-t">Company address: {{ $company['address'] }}</p>
+            <p class="border-t">Company phone: {{ $company['phone'] }}</p>
+            <p class="border-t">Company email: {{ $company['email'] }}</p>
+            <p class="border-t">Company description: {{ $company['description'] }}</p>
         </div>
-        <a href="/companies/{{ $company->id }}/edit"><i class='fa-solid fa-pencil'></i>Edit</a>
+        <a href="/companies/{{ $company['id'] }}/edit" class="text-blue-400 px-6 py-2 rounded-xl"><i
+            class="fa-solid fa-pen-to-square"></i>Edit</a>
 
         <form method='POST' action="{{ $company->id }}">
             @csrf
             @method('DELETE')
-            <button class='text-red-500'>
+            <button class='px-6 py-2 text-red-500'>
                 <i class='fa-solid fa-trash '></i>
                 Delete
             </button>

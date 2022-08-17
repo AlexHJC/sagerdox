@@ -24,8 +24,8 @@
                     <!-- For defining select2 -->
                     <div class="mb-6">
                         <label for="company_id" class="inline-block text-lg mb-2">
-                            Select associated certificates</label>
-                        <select id='sel' class="border border-gray-200 rounded p-2 w-full" name="company_id[]"
+                            Select associated companies</label>
+                        <select id='sel_comp' class="border border-gray-200 rounded p-2 w-full" name="company_id[]"
                             multiple='multiple'>
                         </select>
                         @error('company_id')
@@ -39,7 +39,7 @@
                         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                         $(document).ready(function() {
 
-                            $("#sel").select2({
+                            $("#sel_comp").select2({
                                 placeholder: "Select a Company",
                                 allowClear: true,
                                 ajax: {
@@ -66,7 +66,7 @@
                         });
                     </script>
 
-                    <div class="mb-6">
+                    {{-- <div class="mb-6">
                         <label for="product_code" class="inline-block text-lg mb-2">
                             Product Code</label>
                         <input class="border border-gray-200 rounded p-2 w-full" type="text" name="product_code"
@@ -74,7 +74,52 @@
                         @error('product_code')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror
+                    </div> --}}
+
+                    <!-- For defining select2 -->
+                    <div class="mb-6">
+                        <label for="product_code" class="inline-block text-lg mb-2">
+                            Select associated products</label>
+                        <select id='sel_prod' class="border border-gray-200 rounded p-2 w-full" name="product_code[]"
+                            multiple='multiple'>
+                        </select>
+                        @error('product_code')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
+
+                    <!-- Script -->
+                    <script type="text/javascript">
+                        // CSRF Token
+                        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+                        $(document).ready(function() {
+
+                            $("#sel_prod").select2({
+                                placeholder: "Select a Product",
+                                allowClear: true,
+                                ajax: {
+                                    url: "{{ route('getProducts') }}",
+                                    type: "post",
+                                    dataType: 'json',
+                                    delay: 100,
+                                    data: function(params) {
+                                        return {
+                                            _token: CSRF_TOKEN,
+                                            search: params.term // search term
+                                        };
+                                    },
+                                    processResults: function(response) {
+                                        return {
+                                            results: response
+                                        };
+                                    },
+                                    cache: true
+                                }
+
+                            });
+
+                        });
+                    </script>
 
                     <div class="mb-6">
                         <label for="expiry_date" class="inline-block text-lg mb-2">
@@ -111,7 +156,7 @@
                         <label for="description" class="inline-block text-lg mb-2">
                             Description
                         </label>
-                        <textarea class="border border-gray-200 rounded p-2 w-full" name="description" rows="10">N/A</textarea>
+                        <textarea class="border border-gray-200 rounded p-2 w-full" name="description" rows="10"></textarea>
                         @error('description')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror
