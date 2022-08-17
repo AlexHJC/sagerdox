@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('certificates', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->contrained()->onDelete('cascade');
-            $table->string('title');
+            $table->string('title', 255);
             $table->string('uploads')->nullable();
-            $table->unsignedBigInteger('company_id');
-            $table->unsignedBigInteger('product_code');
-            $table->string('category');
+            $table->string('company_id', 255);
+            $table->string('product_code', 255);
+            $table->string('category', 255);
             $table->date('expiry_date');
             $table->longText('description')->nullable();
             $table->timestamps();

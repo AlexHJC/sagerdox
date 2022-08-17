@@ -1,14 +1,11 @@
 <?php
 
 use App\Http\Controllers\AlertController;
-use App\Models\Certificate;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ProductController;
-use App\Models\Alert;
-use App\Models\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,20 +28,23 @@ Route::get('/certificates/create', [CertificateController::class, 'create'])->mi
 // UPDATE CERTIFICATE store listing data when posted from form
 Route::post('/certificates', [CertificateController::class, 'store'])->middleware('auth');
 
+// show certificate manage page
+Route::get('/certificates/manage', [CertificateController::class, 'manage'])->middleware('auth');
+
 // UPDATE CERTIFICATE show page to edit existing certificate
 Route::get('/certificates/{certificate}/edit', [CertificateController::class, 'edit'])->middleware('auth');
 
 // UPDATE CERTIFICATE submit edited certificate to update
 Route::put('/certificates/{certificate}', [CertificateController::class, 'update'])->middleware('auth');
 
-// DELETE CERTIFICATE submit edited certificate to update
+// DELETE CERTIFICATE delete certificate
 Route::delete('/certificates/{certificate}', [CertificateController::class, 'destroy'])->middleware('auth');
 
 // READ CERTIFICATE show single certificate
 Route::get('/certificates/{certificate}', [CertificateController::class, 'show']);
 
-// show certificate manage page
-Route::get('/certificates/manage', [CertificateController::class, 'manage'])->middleware('auth');
+// certificates select2 ajax query route
+Route::post('/getCertificates', [CertificateController::class, 'getCertificates'])->name('getCertificates');
 
 // CREATE USER show user registration form page
 Route::get('/register', [UserController::class, 'create'])->middleware('guest');
@@ -64,10 +64,11 @@ Route::post('/users/authenticate', [UserController::class, 'authenticate']);
 // show user manage page
 Route::get('/users/manage', [UserController::class, 'manage']);
 
-// crud create, read, update, delete
-
 // CREATE ALERT show create page for alerts
 Route::get('/alerts/create', [AlertController::class, 'create']);
+
+// show alerts manage page
+Route::get('/alerts/manage', [AlertController::class, 'manage']);
 
 // READ ALERT show read page for alerts
 Route::get('/alerts/{alert}', [AlertController::class, 'show']);
@@ -75,14 +76,17 @@ Route::get('/alerts/{alert}', [AlertController::class, 'show']);
 // UPDATE ALERT store new alert data
 Route::post('/alerts', [AlertController::class, 'store']);
 
-// // CREATE ALERT show create page for alerts
-// Route::get('/alerts/create', [AlertController::class, 'create']);
+// UPDATE ALERT show page to edit existing alert
+Route::get('/alerts/{alert}/edit', [AlertController::class, 'edit'])->middleware('auth');
 
-// // READ ALERT show read page for alerts
-// Route::get('/alerts/{alert}', [AlertController::class, 'show']);
+// UPDATE ALERT submit edited alert to update
+Route::put('/alerts/{alert}', [AlertController::class, 'update'])->middleware('auth');
 
-// // UPDATE ALERT store new alert data
-// Route::post('/alerts', [AlertController::class, 'store']);
+// DELETE ALERT delete alert
+Route::delete('/alerts/{alert}', [AlertController::class, 'destroy'])->middleware('auth');
+
+// Alerts select2 ajax query route
+Route::post('/getAlerts', [AlertController::class, 'getAlerts'])->name('getAlerts');
 
 // CREATE COMPANY show create page for companies
 Route::get('/companies/create', [CompanyController::class, 'create']);
@@ -90,20 +94,44 @@ Route::get('/companies/create', [CompanyController::class, 'create']);
 // UPDATE COMPANY store new company data
 Route::post('/companies', [CompanyController::class, 'store']);
 
-// READ COMPANY show read page for COMPANY
+// show company manage page
+Route::get('/companies/manage', [CompanyController::class, 'manage']);
+
+// READ COMPANY show read page for company
 Route::get('/companies/{company}', [CompanyController::class, 'show']);
 
-// // CREATE COMPANY show create page for companies
-// Route::get('/companies/create', [CompanyController::class, 'create']);
+// UPDATE COMPANY PAGE show edit page for company
+Route::get('/companies/{company}/edit', [CompanyController::class, 'edit']);
 
-// // UPDATE COMPANY store new company data
-// Route::post('/companies', [CompanyController::class, 'store']);
+// UPDATE COMPANY submit edited company to update
+Route::put('/companies/{company}', [CompanyController::class, 'update'])->middleware('auth');
 
-// // READ COMPANY show read page for COMPANY
-// Route::get('/companies/{company}', [CompanyController::class, 'show']);
+// DELETE COMPANY delete company
+Route::delete('/companies/{company}', [CompanyController::class, 'destroy'])->middleware('auth');
+
+// Companies select2 ajax query route
+Route::post('/getCompanies', [CompanyController::class, 'getCompanies'])->name('getCompanies');
 
 // CREATE PRODUCT show create page for products
 Route::get('/products/create', [ProductController::class, 'create']);
 
 // UPDATE PRODUCT store new product data
 Route::post('/products', [ProductController::class, 'store']);
+
+// show product page
+Route::get('/products/manage', [ProductController::class, 'manage']);
+
+// UPDATE PRODUCT submit edited product to update
+Route::put('/products/{product}', [ProductController::class, 'update'])->middleware('auth');
+
+// READ PRODUCT show single product
+Route::get('/products/{product}', [ProductController::class, 'show']);
+
+// UPDATE PRODUCT show show edit page for product
+Route::get('/products/{product}/edit', [ProductController::class, 'edit']);
+
+// DELETE PRODUCT delete product
+Route::delete('/products/{product}', [ProductController::class, 'destroy'])->middleware('auth');
+
+// Products select2 ajax query route
+Route::post('/getProducts', [ProductController::class, 'getProducts'])->name('getProducts');

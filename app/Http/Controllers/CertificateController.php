@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Certificate;
+use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -28,7 +29,8 @@ class CertificateController extends Controller
     public function edit(Certificate $certificate)
     {
         return view('certificates.edit', [
-            'certificate' => $certificate
+            'certificate' => $certificate,
+            'companies' => Company::all()
         ]);
     }
 
@@ -46,18 +48,19 @@ class CertificateController extends Controller
         // dd($request->all());
         $formFields = $request->validate([
             'title' => 'required',
-            'company_id' => ['required', 'numeric'],
+            'company_id' => 'required',
             'category' => 'required',
             'product_code' => ['required', 'numeric'],
-            'expiry_date' => ['required', 'date'],
-            'description' => 'required'
+            'expiry_date' => ['required', 'date']
         ]);
 
-        // TODO figure out how to have optional description
-        //      add nullable description in database migrations once this is done
-        // if ($request->has('description')) {
-        //     $formfields['description'] = $request['description'];
-        // }
+        if ($request->company_id) {
+            $formFields['company_id'] = implode(',', $request->company_id);
+        }
+
+        if ($request->has('description')) {
+            $formFields['description'] = $request['description'];
+        }
 
         if ($request->hasFile('uploads')) {
             $formFields['uploads'] = $request->file('uploads')->store('uploads', 'public');
@@ -83,18 +86,19 @@ class CertificateController extends Controller
         // dd($request->all());
         $formFields = $request->validate([
             'title' => 'required',
-            'company_id' => ['required', 'numeric'],
+            'company_id' => 'required',
             'category' => 'required',
             'product_code' => ['required', 'numeric'],
-            'expiry_date' => ['required', 'date'],
-            'description' => 'required'
+            'expiry_date' => ['required', 'date']
         ]);
 
-        // TODO figure out how to have optional description
-        //      add nullable description in database migrations once this is done
-        // if ($request->has('description')) {
-        //     $formfields['description'] = $request['description'];
-        // }
+        if ($request->company_id) {
+            $formFields['company_id'] = implode(',', $request->company_id);
+        }
+
+        if ($request->has('description')) {
+            $formFields['description'] = $request['description'];
+        }
 
         if ($request->hasFile('uploads')) {
             $formFields['uploads'] = $request->file('uploads')->store('uploads', 'public');
@@ -116,11 +120,30 @@ class CertificateController extends Controller
         }
 
         $certificate->delete();
-        return redirect('/')->with('message', 'listing deleted successfully');
+        return back()->with('message', 'Certificate deleted successfully');
     }
 
     public function manage()
     {
         return view('certificates.manage', ['certificates' => auth()->user()->certificates()->get()]);
+    }
+
+    public function getCertificates(Request $request)
+    {
+        $search = $request->search;
+
+        if ($search == '') {
+            $certificates = Certificate::orderby('title', 'asc')->select('id', 'title')->get();
+        } else {
+            $certificates = Certificate::orderby('title', 'asc')->select('id', 'title')->where('title', 'like', '%' . $search . '%')->limit(5)->get();
+        }
+        $response = array();
+        foreach ($certificates as $certificate) {
+            $response[] = array(
+                "id" => $certificate->id,
+                "text" => $certificate->title
+            );
+        }
+        return response()->json($response);
     }
 }

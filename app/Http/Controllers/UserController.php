@@ -62,6 +62,11 @@ class UserController extends Controller
 
     public function manage()
     {
-        return view('users.manage', ['certificates' => auth()->user()->certificates()->get()]);
+        return view('users.manage', [
+            'certificates' => auth()->user()->certificates()->get(),
+            'alerts' => auth()->user()->alerts()->get(),
+            'companies' => auth()->user()->companies()->get(),
+            'products' => auth()->user()->products()->get()
+        ]);
     }
 }

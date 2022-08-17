@@ -19,7 +19,7 @@ class AlertFactory extends Factory
         return [
             'title' => $this->faker->sentence(),
             'period_id' => $this->faker->randomNumber(9, true),
-            // 'certificate_id' => $this->faker->randomNumber(9, true),
+            'certificate_id' => $this->faker->randomNumber(9, true),
             // 'description' => $this->faker->paragraph(5)
         ];
     }

@@ -5,7 +5,7 @@
     {{-- <div class="fixed top-0 left-12 transform-translate-x-12 bg-laravel text-white px-48 py-3">
         <p>{{session('message')}}</p>
     </div> --}}
-    <div class="text-red-400">
+    <div class="text-red-400 w-60">
         <p>{{ session('message') }}</p>
     </div>
 @endif

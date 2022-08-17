@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->contrained()->onDelete('cascade');
             $table->string('title');
-            $table->unsignedBigInteger('company_id');
-            $table->unsignedBigInteger('product_code');
-            $table->unsignedBigInteger('certificate_id');
+            $table->string('company_id', 255);
+            $table->string('product_code', 255);
+            $table->string('certificate_id', 255);
             $table->longText('description')->nullable();
             $table->timestamps();
         });

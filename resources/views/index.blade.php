@@ -12,7 +12,7 @@
             @foreach ($certificates as $certificate)
                 <div class="flex border">
                     <div>
-                        <h3 class="underline text-2xl w-80">
+                        <h3 class="underline text-2xl w-80 hover:text-laravel">
                             <a href="certificates/{{ $certificate['id'] }}">{{ $certificate['title'] }}</a>
                         </h3>
                         <div class="text-xs font-bold mb-1">Company ID: {{ $certificate['company_id'] }}</div>
@@ -43,7 +43,7 @@
                 @if ($certificate['expiry_date'] <= date('Y-m-d H:i:s'))
                     <div class="flex border">
                         <div>
-                            <h3 class="underline text-2xl w-80">
+                            <h3 class="underline text-2xl w-80 hover:text-laravel">
                                 <a href="certificates/{{ $certificate['id'] }}">{{ $certificate['title'] }}</a>
                             </h3>
                             <div class="text-xs font-bold mb-1">Company ID: {{ $certificate['company_id'] }}</div>

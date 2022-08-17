@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('alerts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->contrained()->onDelete('cascade');
-            $table->string('title');
+            $table->string('title', 255);
             $table->unsignedBigInteger('period_id');
-            // $table->unsignedBigInteger('certificate_id');
+            $table->string('certificate_id', 255);
             $table->longText('description')->nullable();
             $table->timestamps();
         });

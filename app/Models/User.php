@@ -48,4 +48,22 @@ class User extends Authenticatable
     {
         return $this->hasMany(Certificate::class, 'user_id');
     }
+
+    // relationship to alerts
+    public function alerts()
+    {
+        return $this->hasMany(Alert::class, 'user_id');
+    }
+
+    // relationship to companies
+    public function companies()
+    {
+        return $this->hasMany(Company::class, 'user_id');
+    }
+
+    // relationship to products
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'user_id');
+    }
 }

@@ -2,28 +2,28 @@
     <div class="bg-gray-50 border border-gray-200 p-4 rounded">
         <header>
             <h1 class="text-lg text-center font-bold my-6 uppercase">
-                Manage Certificates
+                Manage Alerts
             </h1>
         </header>
 
         <table class="w-full table-auto rounded-sm">
             <tbody>
-                @unless($certificates->isempty())
+                @unless($alerts->isempty())
 
-                    @foreach ($certificates as $certificate)
+                    @foreach ($alerts as $alert)
                         <tr class="border-gray-300">
                             <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
-                                <a href="/certificates/{{ $certificate['id'] }}">
-                                    {{ $certificate['title'] }}
+                                <a href="show.html">
+                                    {{ $alert['title'] }}
                                 </a>
                             </td>
                             <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
-                                <a href="/certificates/{{ $certificate['id'] }}/edit"
-                                    class="text-blue-400 px-6 py-2 rounded-xl"><i class="fa-solid fa-pen-to-square"></i>
+                                <a href="/alerts/{{ $alert['id'] }}/edit" class="text-blue-400 px-6 py-2 rounded-xl"><i
+                                        class="fa-solid fa-pen-to-square"></i>
                                     Edit</a>
                             </td>
                             <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
-                                <form method="POST" action="/certificates/{{ $certificate->id }}">
+                                <form method="POST" action="/alerts/{{ $alert->id }}">
                                     @csrf
                                     @method('DELETE')
                                     <button class="text-red-500">
@@ -36,7 +36,7 @@
                 @else
                     <tr class="border-gray-300">
                         <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
-                            <p class="text-center">No certificates to show</p>
+                            <p class="text-center">No alerts to show</p>
                         </td>
                     </tr>
 
