@@ -24,7 +24,9 @@ class CertificateController extends Controller
     public function show(Certificate $certificate)
     {
         return view('certificates.show', [
-            'certificate' => $certificate
+            'certificate' => $certificate,
+            'companies' => Company::all(),
+            'products' => Product::all()
         ]);
     }
 

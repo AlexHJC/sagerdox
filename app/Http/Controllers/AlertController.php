@@ -19,7 +19,8 @@ class AlertController extends Controller
     public function show(Alert $alert)
     {
         return view('alerts.show', [
-            'alert' => $alert
+            'alert' => $alert,
+            'certificates' => Certificate::all()
         ]);
     }
 
@@ -36,10 +37,8 @@ class AlertController extends Controller
         $formFields = $request->validate([
             'title' => 'required',
             'period_id' => ['required', 'numeric'],
-            'certificate_id' => 'required'
+            // 'certificate_id' => 'required'
         ]);
-
-        // TODO? make certificate id optional
 
         if ($request->certificate_id) {
             $formFields['certificate_id'] = implode(',', $request->certificate_id);
@@ -78,10 +77,8 @@ class AlertController extends Controller
         $formFields = $request->validate([
             'title' => 'required',
             'period_id' => ['required', 'numeric'],
-            'certificate_id' => 'required'
+            // 'certificate_id' => 'required'
         ]);
-
-        // TODO? make certificate id optional
 
         if ($request->certificate_id) {
             $formFields['certificate_id'] = implode(',', $request->certificate_id);
@@ -106,7 +103,7 @@ class AlertController extends Controller
         }
 
         $alert->delete();
-        return back()->with('message', 'Alert deleted successfully');
+        return redirect('/')->with('message', 'Alert deleted successfully');
     }
 
     public function getAlerts(Request $request)

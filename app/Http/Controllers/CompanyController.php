@@ -41,13 +41,24 @@ class CompanyController extends Controller
         // dd($request->all());
         $formFields = $request->validate([
             'title' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
-            'email' => ['required', 'email']
+            // 'address' => 'required',
+            // 'phone' => 'required',
+            // 'email' => ['required', 'email']
         ]);
 
         if ($request->has('description')) {
             $formFields['description'] = $request['description'];
+        }
+        if ($request->has('address')) {
+            $formFields['address'] = $request['address'];
+        }
+
+        if ($request->has('phone')) {
+            $formFields['phone'] = $request['phone'];
+        }
+
+        if ($request->has('email')) {
+            $formFields['email'] = $request['email'];
         }
 
         $formFields['user_id'] = auth()->id();

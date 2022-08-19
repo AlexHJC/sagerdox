@@ -50,7 +50,7 @@ class ProductController extends Controller
         $formFields = $request->validate([
             'title' => 'required',
             // 'company_id' => 'required',
-            'product_code' => ['required', 'numeric'],
+            'product_code' => 'required',
             // 'certificate_id' => 'required',
         ]);
 
@@ -88,7 +88,7 @@ class ProductController extends Controller
         $formFields = $request->validate([
             'title' => 'required',
             // 'company_id' => 'required',
-            'product_code' => ['required', 'numeric'],
+            'product_code' => 'required',
             // 'certificate_id' => 'required',
         ]);
 
